@@ -1,0 +1,1 @@
+GLOG_minloglevel=1 ./demo.py
