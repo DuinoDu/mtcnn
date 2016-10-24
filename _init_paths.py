@@ -12,12 +12,8 @@ def add_path(path):
     if path not in sys.path:
         sys.path.insert(0, path)
 
-py_faster_rcnn = '/home/duino/project/py-faster-rcnn'
+caffe_path = '/home/duino/project/py-faster-rcnni/caffe_fast_rcnn'
 
 # Add caffe to PYTHONPATH
-caffe_path = osp.join(py_faster_rcnn, 'caffe-fast-rcnn', 'python')
+caffe_path = osp.join(caffe_path, 'python')
 add_path(caffe_path)
-
-# Add fast_rcnn to PYTHONPATH
-lib_path = osp.join(py_faster_rcnn, 'lib')
-add_path(lib_path)
