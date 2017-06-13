@@ -549,9 +549,9 @@ def main():
         #    import shutil
         #    shutil.copy(imgpath, '/home/duino/Videos/3/disdata/negetive/'+os.path.split(imgpath)[1] )
 
-
-        for i in range(len(boundingboxes)):
-            cv2.rectangle(img, (int(boundingboxes[i][1]), int(boundingboxes[i][0])), (int(boundingboxes[i][3]), int(boundingboxes[i][2])), (0,255,0), 1)    
+        # useless org source use wrong values from boundingboxes,case uselsee rect is drawed 
+#        for i in range(len(boundingboxes)):
+#            cv2.rectangle(img, (int(boundingboxes[i][0]), int(boundingboxes[i][1])), (int(boundingboxes[i][2]), int(boundingboxes[i][3])), (0,255,0), 1)    
 
         img = drawBoxes(img, boundingboxes)
         cv2.imshow('img', img)
