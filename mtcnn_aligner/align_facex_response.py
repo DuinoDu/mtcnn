@@ -92,7 +92,16 @@ def main(json_file, save_dir=None, save_img=True, show_img=True):
             draw_faces(img, bboxes, points)
 
         if save_img:
-            save_name = osp.join(save_dir, osp.basename(img_path))
+            pdir = save_dir
+            dir_name, base_name = osp.split(img_path)
+            if dir_name:
+                _, pdir = osp.split(dir_name)
+                if pdir:
+                    pdir = osp.join(save_dir, pdir)
+                    if not osp.exists(pdir):
+                        os.makedirs(pdir)
+
+            save_name = osp.join(pdir, osp.basename(img_path))
             cv2.imwrite(save_name, img)
 
         if show_img:
@@ -105,7 +114,8 @@ def main(json_file, save_dir=None, save_img=True, show_img=True):
     fp_rlt.close()
 
 if __name__ == '__main__':
-    json_file = './facex_det_response.json'
+#    json_file = './facex_det_response.json'
+    json_file = r'C:\zyf\github\misc-zyf\facex_det_wlc_cvt.json'
     save_dir = None
 
     main(json_file, save_dir, save_img=True, show_img=False)
