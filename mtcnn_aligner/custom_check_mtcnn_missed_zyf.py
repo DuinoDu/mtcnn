@@ -15,8 +15,10 @@ import sys
 #from matplotlib import pyplot as plt
 from mtcnn_aligner import MtcnnAligner
 
+
 def print_usage():
-    usage = 'python %s <img-det-json-file> <lfw-root-dir> [<MTCNN-model-dir>] [<save-dir>]' % osp.basename(__file__)
+    usage = 'python %s <img-det-json-file> <lfw-root-dir> [<MTCNN-model-dir>] [<save-dir>]' % osp.basename(
+        __file__)
     print('USAGE: ' + usage)
 
 
@@ -34,7 +36,8 @@ def get_gt_overlap(faces, gt=None):
         _gt_area = GT_AREA
     else:
         _gt_rect = gt
-        _gt_area = (_gt_rect[2] - _gt_rect[0] + 1) * (_gt_rect[3] - _gt_rect[1] + 1)
+        _gt_area = (_gt_rect[2] - _gt_rect[0] + 1) * \
+            (_gt_rect[3] - _gt_rect[1] + 1)
 
     rects = [it['rect'] for it in faces]
 
@@ -70,6 +73,7 @@ def get_max_gt_overlap_face(faces, thresh=0.5):
         return max_id
     else:
         return -1
+
 
 def main(face_json_file, img_root_dir, mtcnn_model_dir, save_dir=None):
     if save_dir is None:
@@ -116,7 +120,7 @@ def main(face_json_file, img_root_dir, mtcnn_model_dir, save_dir=None):
 
         overlap_thresh_0 = overlap_thresh
 
-        ## Tom_Brady_0002 is special cauz the face in the image is very small
+        # Tom_Brady_0002 is special cauz the face in the image is very small
         if 'Tom_Brady_0002' in img_fn:
             overlap_thresh_0 = 0.25
 
@@ -133,13 +137,19 @@ def main(face_json_file, img_root_dir, mtcnn_model_dir, save_dir=None):
 
         nfaces = item['face_count']
 
+        # added by zhaoyafei
+        img = cv2.imread(img_fn)
+        h, w, c = img.shape
+        gt = [w / 4, h / 4, w * 3 / 4, h * 3 / 4]
+        ##
+
         if nfaces < 1:
             missed_count1 += 1
             fp_log2.write(item['filename'] + ': ' +
                           "item['face_count'] < 1" + '\n')
 
             img = cv2.imread(img_fn)
-            boxes, points = aligner.align_face(img, [GT_RECT])
+            boxes, points = aligner.align_face(img, [gt])
 
             item['face_count'] = 1
             box = boxes[0]
@@ -156,11 +166,8 @@ def main(face_json_file, img_root_dir, mtcnn_model_dir, save_dir=None):
             fp_log2.write('-->faces added by aligner:\n{}\n'.format(tmp))
 
             continue
-        img = cv2.imread(img_fn)
-        h,w,c = img.shape
-        gt = [w/4, h/4, w*3/4, h*3/4]
-        overlaps = get_gt_overlap(item['faces'], gt)
 
+        overlaps = get_gt_overlap(item['faces'], gt)
         max_overlap_idx = overlaps.argmax()
 
         if overlaps[max_overlap_idx] >= overlap_thresh_0:
@@ -177,7 +184,7 @@ def main(face_json_file, img_root_dir, mtcnn_model_dir, save_dir=None):
             fp_log2.write("--> overlaps = {}\n".format(overlaps))
 
             #img = cv2.imread(img_fn)
-            boxes, points = aligner.align_face(img, [GT_RECT])
+            boxes, points = aligner.align_face(img, [gt])
 
             item['face_count'] += 1
             box = boxes[0]
@@ -192,8 +199,9 @@ def main(face_json_file, img_root_dir, mtcnn_model_dir, save_dir=None):
             fp_log2.write('-->faces added by aligner:\n{}\n'.format(tmp))
 
     fp_log2.write("\n==>Images with missed faces: {}\n".format(missed_count1
-                                                   + missed_count2))
-    fp_log2.write("\t{} missed because of no detection\n".format(missed_count1))
+                                                               + missed_count2))
+    fp_log2.write(
+        "\t{} missed because of no detection\n".format(missed_count1))
     fp_log2.write("\t{} missed because of max_overlap<thresh\n".format(
         missed_count2))
 
@@ -202,6 +210,7 @@ def main(face_json_file, img_root_dir, mtcnn_model_dir, save_dir=None):
 
     fp_log1.close()
     fp_log2.close()
+
 
 if __name__ == "__main__":
     print_usage()
