@@ -532,7 +532,7 @@ def main():
     #imglistfile = "/home/duino/iactive/mtcnn/file.txt"
     minsize = 20
 
-    caffe_model_path = "./model"
+    caffe_model_path = "../model"
 
     threshold = [0.6, 0.7, 0.7]
     factor = 0.709
