@@ -1,0 +1,5 @@
+../test_imgs/test1.jpg
+../test_imgs/test2.jpg
+../test_imgs/tennis_big4.jpg
+../test_imgs/girls.jpg
+../test_imgs/oscars.jpg
