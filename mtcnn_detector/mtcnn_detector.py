@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import _init_paths
 import caffe
 import cv2
 import numpy as np
