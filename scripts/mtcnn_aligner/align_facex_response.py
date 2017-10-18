@@ -12,6 +12,7 @@ import json
 import time
 import cv2
 
+import _init_paths
 from mtcnn_aligner import MtcnnAligner, draw_faces
 
 
@@ -24,7 +25,7 @@ def main(json_file, save_dir=None, save_img=True, show_img=True):
         save_dir = './fa_facex_rlt'
 
     save_json = 'mtcnn_align_rlt.json'
-    caffe_model_path = "../model"
+    caffe_model_path = "../../model"
 
     fp_json = open(json_file, 'r')
     facex_response = json.load(fp_json)

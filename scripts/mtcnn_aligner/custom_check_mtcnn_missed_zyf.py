@@ -12,6 +12,7 @@ import os
 import os.path as osp
 import sys
 
+import _init_paths
 #from matplotlib import pyplot as plt
 from mtcnn_aligner import MtcnnAligner
 
@@ -214,7 +215,7 @@ def main(face_json_file, img_root_dir, mtcnn_model_dir, save_dir=None):
 
 if __name__ == "__main__":
     print_usage()
-    mtcnn_model_dir = '../model'
+    mtcnn_model_dir = '../../model'
     save_dir = None
 
     #fd_json_fn = r'../../prepare-faces-zyf/lfw-mtcnn-fd-rlt/lfw-mtcnn-v2-matlab-fd-rlt-3imgs.json'
