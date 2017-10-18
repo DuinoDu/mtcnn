@@ -1,6 +1,6 @@
 # MTCNN-v2 face detector (pycaffe version)
 
-Author: zhaoyafei0210@gmail.com (https://github.com/walkncross)
+Author: zhaoyafei0210@gmail.com (https://github.com/walkoncross)
 
 This repo is based on DuinoDu's MTCNN-v1 (3 stages) repo: https://github.com/DuinoDu/mtcnn, while it implements LNet of MTCNN-v2.
 
