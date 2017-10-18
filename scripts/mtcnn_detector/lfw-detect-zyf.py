@@ -11,6 +11,7 @@ import cv2
 import time
 import json
 
+import _init_paths
 from mtcnn_detector import MtcnnDetector, draw_faces
 
 
@@ -26,7 +27,7 @@ def main(lfw_list_fn,
          show_img=False):
 
     minsize = 20
-    caffe_model_path = "../model"
+    caffe_model_path = "../../model"
     threshold = [0.6, 0.7, 0.7]
     scale_factor = 0.709
 
